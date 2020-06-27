@@ -124,6 +124,7 @@ if(isset($_POST['insert_product'])){
             move_uploaded_file($temp_name2,"products_images/$product_Img2");
             move_uploaded_file($temp_name3,"products_images/$product_Img3");
         // query creation
+        // for date either we can use current_timestamp() or NOW() function in php
         $insert_product = "INSERT INTO `products` (cat_id , brand_id , date, product_title, product_img1, product_img2, product_img3, product_price, product_desc, status) VALUES ('$product_cat', '$product_brand', current_timestamp(), '$product_title', '$product_Img1', '$product_Img2', '$product_Img3', '$product_price', '$product_desc', '$status')";
         $run_product = mysqli_query($con,$insert_product);
         if($run_product)
