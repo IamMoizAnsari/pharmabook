@@ -85,7 +85,43 @@ include('includes/DB.php');
                 <!-- sidebar items ends -->
 
             </div>
-            <div id="right_content_area">content area</div>
+            <div id="right_content_area">
+                <!-- for shopping details headlines-->
+                <div id="headline">
+                    <div id="headline_content">
+                        <div>Welcome Guest!<b style="color:yellow">Shopping Cart</b><span> - Items - Price </span></div>
+                    </div>
+                </div>
+                <!-- for product list boxes -->
+                <div class="products_box">
+                    <?php
+                    $get_products = "select * from products order by rand() LIMIT 0,6";
+                    $run_products = mysqli_query($con,$get_products);
+                    while($row_products = mysqli_fetch_array($run_products)){
+                        $product_id = $row_products['product_id'];
+                        $cat_id = $row_products['cat_id'];
+                        $brand_id = $row_products['brand_id'];
+                        $product_title = $row_products['product_title'];
+                        $product_img1 = $row_products['product_img1'];
+                        $product_price = $row_products['product_price'];
+                        $product_desc = $row_products['product_desc'];
+                        // shows a product box
+                        echo" 
+                        <div id='single_product'>
+                        <h1>$product_title</h1>
+                        <img src='admin_area/products_images/img.jpg' alt='' width='70%' height='100px'>
+                        <br/>
+                        <b>price :- $product_price RS</b>
+                        <br/>
+                        <a href='details.php?pro_id=$product_id' style='float:left'>Details</a>
+                        <a href='index.php?add_cart=$product_id'><button style='float:right'>Add to Cart</button></a>
+                        
+                        </div>";
+                        
+                    }
+                    ?>
+                </div>
+            </div>
         </section>
        <!-- content area ends -->
 
