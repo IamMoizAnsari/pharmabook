@@ -25,7 +25,7 @@ include('function/functions.php');
             <!-- menu starts here -->
             <menu>
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li><a href="#">All Products</a></li>
                     <li><a href="#">My Account</a></li>
                     <li><a href="#">Sign Up</a></li>
@@ -82,6 +82,8 @@ include('function/functions.php');
                     <?php
                     // function call to get product list
                     getPro();
+                    getCatPro();
+                    getBrandPro();
                     ?>
                 </div>
             </div>
