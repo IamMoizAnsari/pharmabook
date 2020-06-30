@@ -28,7 +28,6 @@ function getPro(){
                 <a href='index.php?add_cart=$product_id'><button style='float:right'>Add to Cart</button></a>          
             </div>";                        
         }
-
         }
     }
     
@@ -107,6 +106,7 @@ function getBrandPro(){
             }
         }
     }
+}
 }
 // function to get categories
 function getCategories()
