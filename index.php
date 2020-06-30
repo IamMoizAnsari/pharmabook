@@ -72,9 +72,12 @@ include('function/functions.php');
             </div>
             <div id="right_content_area">
                 <!-- for shopping details headlines-->
+                <?php
+                cart();
+                ?>
                 <div id="headline">
                     <div id="headline_content">
-                        <div>Welcome Guest!<b style="color:yellow">Shopping Cart</b><span> - Items - Price </span></div>
+                        <div>Welcome Guest!<b style="color:yellow">Shopping Cart</b><span> -Total Items [<?php items()?>]- Price </span></div>
                     </div>
                 </div>
                 <!-- for product list boxes -->

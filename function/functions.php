@@ -1,7 +1,52 @@
 <?php
 
  $db = mysqli_connect("localhost","root","","pharmabook");
+// get IPAddress
+function getIpAddress(){
+    return $_SERVER['REMOTE_ADDR'];
+}
+// creating script for cart
+function cart(){
+    if(isset($_GET['add_cart'])){
+        global $db; 
+        $ip = getIpAddress();
+        $p_id = $_GET['add_cart'];
+        $check_pro = "select * from cart where p_id = '$p_id' AND ip_add='$ip'";
+        $run_check_pro = mysqli_query($db,$check_pro);
+        if(mysqli_num_rows($run_check_pro)>0){
+            echo "<script>alert('product already exists into cart !')</script>";
+        }else{
+            $add_pro_cart = "insert into cart (p_id,ip_add,qty) values ('$p_id','$ip',1)";
+            $run_add_pro_cart = mysqli_query($db,$add_pro_cart);
+            if($run_add_pro_cart){
+                echo "<script>alert('product added into cart !')</script>";
+                echo "<script>windows.open('index.php','_self')</script>";
+            }else{
+                echo "<script>windows.open('index.php','_self')</script>";
+                echo "<script>alert('adding fail !')</script>";
+            }
 
+        }
+
+    }
+}
+// get number of items
+function items()
+{
+    global $db;
+    $ip = getIpAddress();
+    if(isset($_GET['add_cart'])){
+        $get_items = "select * from cart where ip_add = '$ip'";
+        $run_items = mysqli_query($db,$get_items);
+        $count_items = mysqli_num_rows($run_items);
+    }else{
+        $get_items = "select * from cart where ip_add = '$ip'";
+        $run_items = mysqli_query($db,$get_items);
+        $count_items = mysqli_num_rows($run_items);
+    }
+    echo $count_items;
+}
+// get list of six products
 function getPro(){
     global $db;
     if(!isset($_GET['cat'])){
