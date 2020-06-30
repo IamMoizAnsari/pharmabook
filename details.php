@@ -79,11 +79,44 @@ include('function/functions.php');
                 </div>
                 <!-- for product list boxes -->
                 <div class="products_box">
-                    <?php
-                    // function call to get product list
-                    getPro();
-                    getCatPro();
-                    getBrandPro();
+                <?php
+                if(isset($_GET['pro_id'])){
+                    $pro_id = $_GET['pro_id'];
+                    $get_products = "select * from products where product_id = '$pro_id'";
+                    $run_products = mysqli_query($db,$get_products);
+                    $count = mysqli_num_rows($run_products);
+                    if($count == 0){
+                        echo "<h2>No product found !<h2/>";
+                    }else{
+                        while($row_products = mysqli_fetch_array($run_products)){
+                        $product_id = $row_products['product_id'];
+                        $cat_id = $row_products['cat_id'];
+                        $brand_id = $row_products['brand_id'];
+                        $product_title = $row_products['product_title'];
+                        $product_img1 = $row_products['product_img1'];
+                        $product_img2 = $row_products['product_img2'];
+                        $product_img3 = $row_products['product_img3'];
+                        $product_price = $row_products['product_price'];
+                        $product_desc = $row_products['product_desc'];
+                        // shows a product box
+                        echo" 
+                            <div id='single_product'>
+                                <h1>$product_title</h1>
+                                <img src='admin_area/products_images/img.jpg' alt='' width='25%' height='100px'>
+                                <img src='admin_area/products_images/img.jpg' alt='' width='35%' height='100px'>
+                                <img src='admin_area/products_images/img.jpg' alt='' width='35%' height='100px'>
+                                <br/>
+                                <b>price :- $product_price RS</b>
+                                <h4>Details : -</h4>
+                                <i>$product_desc</i>
+                                <br/>
+                                <a href='index.php' style='float:left'>Go Back</a>
+                                <a href='index.php?add_cart=$product_id'><button style='float:right'>Add to Cart</button></a>          
+                            </div>";                        
+                        }
+                    }
+                }
+                   
                     ?>
                 </div>
             </div>
