@@ -107,7 +107,6 @@ function getBrandPro(){
         }
     }
 }
-}
 // function to get categories
 function getCategories()
 {
