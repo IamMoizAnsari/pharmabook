@@ -26,7 +26,7 @@ include('function/functions.php');
             <menu>
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="all_products.php">All Products</a></li>
+                    <li><a href="all_products.phps">All Products</a></li>
                     <li><a href="my_account.php">My Account</a></li>
                     <li><a href="uaer_registeration.php">Sign Up</a></li>
                     <li><a href="cart.php">shopping cart</a></li>
@@ -80,10 +80,34 @@ include('function/functions.php');
                 <!-- for product list boxes -->
                 <div class="products_box">
                     <?php
-                    // function call to get product list
-                    getPro();
-                    getCatPro();
-                    getBrandPro();
+                        $get_products = "select * from products order by rand()";
+                        $run_products = mysqli_query($db,$get_products);
+                        $count = mysqli_num_rows($run_products);
+                        if($count == 0){
+                            echo "<h2>No product found !<h2/>";
+                        }else{
+                            while($row_products = mysqli_fetch_array($run_products)){
+                            $product_id = $row_products['product_id'];
+                            $cat_id = $row_products['cat_id'];
+                            $brand_id = $row_products['brand_id'];
+                            $product_title = $row_products['product_title'];
+                            $product_img1 = $row_products['product_img1'];
+                            $product_price = $row_products['product_price'];
+                            $product_desc = $row_products['product_desc'];
+                            // shows a product box
+                            echo" 
+                                <div id='single_product'>
+                                    <h1>$product_title</h1>
+                                    <img src='admin_area/products_images/img.jpg' alt='' width='70%' height='100px'>
+                                    <br/>
+                                    <b>price :- $product_price RS</b>
+                                    <br/>
+                                    <a href='details.php?pro_id=$product_id' style='float:left'>Details</a>
+                                    <a href='index.php?add_cart=$product_id'><button style='float:right'>Add to Cart</button></a>          
+                                </div>";                        
+                            }
+                        }
+                   
                     ?>
                 </div>
             </div>
