@@ -7,5 +7,5 @@
         <br/>
         <input type="submit" name="c_login" value="Login">
     </form>
-    <h2><a href="customer_registration.php">New Registration Here!</a></h2>
+    <h2><a href="customer/customer_registration.php">New Registration Here!</a></h2>
 </div>
