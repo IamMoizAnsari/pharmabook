@@ -46,6 +46,28 @@ function items()
     }
     echo $count_items;
 }
+// get price of all item added into cart
+function getPrice(){
+    $ip = getIpAddress();
+    global $db;
+    $total = 0;
+    $get_pro_id = "select * from cart where ip_add='$ip'";
+    $run_get_pro_id = mysqli_query($db,$get_pro_id);
+    while($record = mysqli_fetch_array($run_get_pro_id)){
+        $pro_id = $record['p_id'];
+        $get_pro_price = "select * from products where product_id = '$pro_id'";
+        $run_pro_price = mysqli_query($db,$get_pro_price);
+        while($each_record = mysqli_fetch_array($run_pro_price))
+        {
+            $product_price = array($each_record['product_price']);
+            $values = array_sum($product_price);
+            $total += $values;
+
+        }
+
+    }
+echo "RS ".$total;
+}
 // get list of six products
 function getPro(){
     global $db;

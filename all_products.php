@@ -77,7 +77,7 @@ include('function/functions.php');
                 ?>
                 <div id="headline">
                     <div id="headline_content">
-                        <div>Welcome Guest!<b style="color:yellow">Shopping Cart</b><span> -Total Items [<?php items()?>]- Price </span></div>
+                        <div>Welcome Guest!<b style="color:yellow">Shopping Cart</b><span> -Total Items [<?php items()?>]- Price [<?php getPrice()?>]<a href="cart.php" style="color:yellow">Go to Cart</a></span></div>
                     </div>
                 </div>
                 <!-- for product list boxes -->
