@@ -1,7 +1,74 @@
 <?php
 
  $db = mysqli_connect("localhost","root","","pharmabook");
+// get IPAddress
+function getIpAddress(){
+    return $_SERVER['REMOTE_ADDR'];
+}
+// creating script for cart
+function cart(){
+    if(isset($_GET['add_cart'])){
+        global $db; 
+        $ip = getIpAddress();
+        $p_id = $_GET['add_cart'];
+        $check_pro = "select * from cart where p_id = '$p_id' AND ip_add='$ip'";
+        $run_check_pro = mysqli_query($db,$check_pro);
+        if(mysqli_num_rows($run_check_pro)>0){
+            echo "<script>alert('product already exists into cart !')</script>";
+        }else{
+            $add_pro_cart = "insert into cart (p_id,ip_add,qty) values ('$p_id','$ip',1)";
+            $run_add_pro_cart = mysqli_query($db,$add_pro_cart);
+            if($run_add_pro_cart){
+                echo "<script>alert('product added into cart !')</script>";
+                echo "<script>windows.open('index.php','_self')</script>";
+            }else{
+                echo "<script>windows.open('index.php','_self')</script>";
+                echo "<script>alert('adding fail !')</script>";
+            }
 
+        }
+
+    }
+}
+// get number of items
+function items()
+{
+    global $db;
+    $ip = getIpAddress();
+    if(isset($_GET['add_cart'])){
+        $get_items = "select * from cart where ip_add = '$ip'";
+        $run_items = mysqli_query($db,$get_items);
+        $count_items = mysqli_num_rows($run_items);
+    }else{
+        $get_items = "select * from cart where ip_add = '$ip'";
+        $run_items = mysqli_query($db,$get_items);
+        $count_items = mysqli_num_rows($run_items);
+    }
+    echo $count_items;
+}
+// get price of all item added into cart
+function getPrice(){
+    $ip = getIpAddress();
+    global $db;
+    $total = 0;
+    $get_pro_id = "select * from cart where ip_add='$ip'";
+    $run_get_pro_id = mysqli_query($db,$get_pro_id);
+    while($record = mysqli_fetch_array($run_get_pro_id)){
+        $pro_id = $record['p_id'];
+        $get_pro_price = "select * from products where product_id = '$pro_id'";
+        $run_pro_price = mysqli_query($db,$get_pro_price);
+        while($each_record = mysqli_fetch_array($run_pro_price))
+        {
+            $product_price = array($each_record['product_price']);
+            $values = array_sum($product_price);
+            $total += $values;
+
+        }
+
+    }
+echo "RS ".$total;
+}
+// get list of six products
 function getPro(){
     global $db;
     if(!isset($_GET['cat'])){
