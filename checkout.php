@@ -78,7 +78,19 @@ include('function/functions.php');
                 ?>
                 <div id="headline">
                     <div id="headline_content">
-                        <div>Welcome Guest!<b style="color:yellow">Shopping Cart</b><span> -Total Items [<?php items()?>]- Price [<?php getPrice()?>]<a href="cart.php" style="color:yellow">Go to Cart</a></span></div>
+                        <div>Welcome Guest!<b style="color:yellow">Shopping Cart</b><span> -Total Items [<?php items()?>]- Price [<?php getPrice()?>]<a href="cart.php" style="color:yellow">Go to Cart</a></span>
+                        <?php
+                        if(isset($_SESSION['customer_email']))
+                        {
+                            echo "<a href='customer/logout.php' style='color:#dddddd'>Logout</a>";
+                        }
+                        else
+                        {
+                            echo "<a href='checkout.php' style='color:#dddddd'>Login</a>";
+                        }
+                        
+                        ?>
+                        </div>
                     </div>
                 </div>
                 <!-- for product list boxes -->
