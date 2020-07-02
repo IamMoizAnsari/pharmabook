@@ -99,7 +99,13 @@ include('function/functions.php');
                     if(!isset($_SESSION['customer_email'])){
                         include("customer/customer_login.php");
                     }else{
-                        include("payment_options.php");
+                        if(items() == 0){
+                            echo "<script>window.open('customer/my_account.php','_self')</script>";
+                        }
+                        else{
+                            include("payment_options.php");
+                        }
+                        
                     }
                     ?>
                 </div>
