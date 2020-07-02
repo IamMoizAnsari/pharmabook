@@ -59,3 +59,21 @@ include ("../includes/DB.php");
 </body>
 </html>
 
+<?php
+    if(isset($_POST['create_user']))
+    {
+        $c_name = $_POST['cutomer_name'];
+        $c_email = $_POST['cutomer_email'];
+        $c_pass = $_POST['cutomer_pass'];
+        $c_img = $_POST['customer_image'];
+        $c_num = $_POST['customer_contact'];
+        $c_add = $_POST['customer_address'];
+        $c_city = $_POST['customer_city'];
+        $c_country = $_POST['customer_country'];
+
+        $create_user = "INSERT INTO `customers` (`customer_name`, `customer_email`, `customer_password`, `customer_contact`, `customer_city`, `customer_country`, `customer_address`, `customer_image`) VALUES ('$c_name', '$c_email', '$c_pass', '$c_num', '$c_city', '$c_country', '$c_add', '$c_img')";
+        $run_create_user = mysqli_query($con,$create_user);
+        if()
+
+    }
+?>
