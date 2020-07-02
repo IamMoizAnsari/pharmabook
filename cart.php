@@ -78,7 +78,7 @@ include('function/functions.php');
                 ?>
                 <div id="headline">
                     <div id="headline_content">
-                        <div>Welcome Guest!<b style="color:yellow">Shopping Cart</b><span> -Total Items [<?php items()?>]- Price [<?php getPrice()?>]<a href="cart.php" style="color:yellow">Go to Cart</a></span>
+                        <div>Welcome Guest!<b style="color:yellow">Shopping Cart</b><span> -Total Items [<?php items()?>]- Price [<?php getPrice()?>]<a href="index.php" style="color:yellow">Back to shopping</a></span>
                         <?php
                         if(isset($_SESSION['customer_email']))
                         {
