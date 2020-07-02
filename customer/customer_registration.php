@@ -1,5 +1,6 @@
 <?php
 include ("../includes/DB.php");
+include("../function/functions.php")
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +48,16 @@ include ("../includes/DB.php");
             </tr>
             <tr>
                 <td><b>Country</b></td>
-                <td><input type="text" name="customer_country"></td>
+                <td>
+                    <select name="custmer_country">
+                        <option>India</option>
+                        <option>Pakistan</option>
+                        <option>Bangladesh</option>
+                        <option>Afghanistan</option>
+                        <option>Iraq</option>
+                        <option>Iran</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" name="create_user" value="Create"></td>
@@ -65,7 +75,7 @@ include ("../includes/DB.php");
         $c_name = $_POST['cutomer_name'];
         $c_email = $_POST['cutomer_email'];
         $c_pass = $_POST['cutomer_pass'];
-        $c_img = $_POST['customer_image'];
+        $c_img = $_FILES['customer_image']['name'];
         $c_num = $_POST['customer_contact'];
         $c_add = $_POST['customer_address'];
         $c_city = $_POST['customer_city'];
@@ -73,7 +83,21 @@ include ("../includes/DB.php");
 
         $create_user = "INSERT INTO `customers` (`customer_name`, `customer_email`, `customer_password`, `customer_contact`, `customer_city`, `customer_country`, `customer_address`, `customer_image`) VALUES ('$c_name', '$c_email', '$c_pass', '$c_num', '$c_city', '$c_country', '$c_add', '$c_img')";
         $run_create_user = mysqli_query($con,$create_user);
-        if()
-
+        if($run_create_user)
+        {
+            $_SESSION['customer_email'] = $c_email;
+            echo "<script>alert('Account created successfully !')</script>";
+            $c_ip = getIpAddress();
+            $sel_cart = "select * from cart where ip_add ='$c_ip' ";
+            $run_sel_cart = mysqli_query($con,$run_sel_cart);
+            $check_cart = mysqli_num_rows($run_sel_cart);
+                if($check_cart > 0 ){
+                    echo "<script>window.open('../checkout.php','_self')</script>";
+                }else{
+                    echo "<script>window.open('../index.php','_self')</script>";
+                }
+            }else{
+                echo "<script>alert('Error in creating account .')</script>";
+        }
     }
 ?>
