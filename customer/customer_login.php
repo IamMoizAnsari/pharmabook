@@ -10,7 +10,7 @@
         <br/>
         <input type="submit" name="c_login" value="Login">
     </form>
-    <h2><a href="customer_registration.php">New Registration Here!</a></h2>
+    <h2><a href="customer/customer_registration.php">New Registration Here!</a></h2>
 </div>
 <?php
 if(isset($_POST['c_login'])){
@@ -28,7 +28,7 @@ if(isset($_POST['c_login'])){
     if($check_customer ==0){
         echo "<script>alert('Email address or Password is not correct , Try again !')</script>";
         exit();
-    }
+    }else{
 // if customer exist
     if($check_customer==1 AND $check_cart==0){
         // customer exist but no items into the cart then go to account page
@@ -37,8 +37,9 @@ if(isset($_POST['c_login'])){
     }else{
         // customer exist and have items into the cart then go to payment page
         $_SESSION['customer_email'] = $email;
-        echo "<script>window.open('payment_options.php','_self')</script>";
+        echo "<script>window.open('checkout.php','_self')</script>";
     }
+}
 }
 
 ?>
